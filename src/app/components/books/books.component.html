@@ -1,0 +1,26 @@
+<div class="form-page">
+  <h2>Books</h2><br><br>
+
+  <h5>All Books</h5>
+  <ul>
+    <li *ngFor="let book of books">
+      <a [routerLink]="['/book/'+book._id]" data-id="{{book._id}}" (click)="onSelect(book)">
+        <em>{{book.title}}</em>, {{book.author}}
+      </a>
+      <button class="delete" data-id="{{book._id}}" (click)="deleteBook(book._id)"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+    </li>
+
+  </ul><br><br>
+
+  <h5>Add Book</h5>
+  <form (submit)="addBook($event)">
+    <input type="text" [(ngModel)]="title" name="title" class="form-control" placeholder="Title">
+    <input type="text" [(ngModel)]="author" name="author" class="form-control" placeholder="Author">
+    <button type="submit" class="btn btn-primary">
+      Submit
+    </button>
+
+  </form>
+
+
+</div>

@@ -1,0 +1,8 @@
+label { margin: 0 25px 0 0; }
+input { margin: 0 0 10px; }
+button { cursor: pointer; }
+.delete { background: #fff; border: #fff; float: }
+ul { position: relative; overflow: hidden; display: inline-block; }
+li { display: inline-block; float: left; clear: both; width: 100%; }
+i { color: #d9534f; position: relative; top: 1px; right: 7px; margin: 0 0 0 20px; }
+i:hover { color: #d67876; }

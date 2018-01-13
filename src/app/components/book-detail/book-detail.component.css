@@ -1,0 +1,5 @@
+label { width: 75px; }
+button { cursor: pointer; }
+.delete { background: #fff; border: #fff; }
+i { color: #d9534f; position: relative; top: 1px; right: 7px; margin: 0 0 0 15px; }
+i:hover { color: #d67876; }

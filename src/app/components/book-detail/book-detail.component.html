@@ -1,0 +1,7 @@
+<div *ngIf="book" class="text-page">
+  <h2>{{book.title}} <button class="delete" data-id="{{book._id}}" (click)="deleteBook(book._id)"><i class="fa fa-trash-o" aria-hidden="true"></i></button></h2>
+  <p>Id: {{book._id}}</p>
+  <p><label>Title:</label> <input [(ngModel)]="book.title" placeholder="title"></p>
+  <p><label>Author:</label> <input [(ngModel)]="book.author" placeholder="author"></p>
+  <button (click)="updateBook(book)" class="btn btn-primary">Submit Edit</button>
+</div>

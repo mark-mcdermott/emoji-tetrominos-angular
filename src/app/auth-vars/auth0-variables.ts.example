@@ -1,0 +1,22 @@
+/* don't touch this object, only the one below */
+interface AuthConfig {
+  clientID: string;
+  domain: string;
+  callbackURL: string;
+}
+
+/* get the below clientID & domain from your auth0 account 
+   create a "client" and grab the clientID & domain from there 
+   put the clientId & domain & callbackurl in '' to make them  
+   strings.  the callback url is something like 
+   http://mydomainname.com:4200/callback and put it in your
+   auth0 client settings.  it won't work if it's not both in
+   the auth0 settings and here.  i couldn't get localhost
+   to work on mac with angular ng serve */ 
+
+export const AUTH_CONFIG: AuthConfig = {
+  clientID: '<enter client id here>',
+  domain: '<enter domain here>',
+  callbackURL: '<enter callbackUrl here>'
+};
+

@@ -1,0 +1,14 @@
+<!--
+<div class="auth-message">
+  <p *ngIf="auth.isAuthenticated()">Logged in</p>
+  <p *ngIf="!auth.isAuthenticated()">Not logged in. <a (click)="auth.login()">Log In</a> to continue.</p>
+</div>
+-->
+
+<div class="jumbotron">
+  <h1>Auth0-Mongo-Angular Test App</h1>
+  Dr. Simon Tam: [to River] If there's any fighting, drop to the floor or run away. <br>
+  Dr. Simon Tam: It's okay to leave them to die. <br>
+  <br>
+  <a *ngIf="!auth.isAuthenticated()" class="btn btn-lg btn-primary" href="../../components/navbar/" role="button">New User? Get Started</a>
+</div>
