@@ -17,6 +17,7 @@ import { ScoresComponent } from './components/scores/scores.component';
 import { ScoreDetailComponent } from './components/score-detail/score-detail.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { GameComponent } from './components/game/game.component';
 
 
 
@@ -31,7 +32,8 @@ import { AdminComponent } from './components/admin/admin.component';
     ScoresComponent,
     ScoreDetailComponent,
     ProfileComponent,
-    AdminComponent
+    AdminComponent,
+    GameComponent
   ],
   imports: [
     BrowserModule,

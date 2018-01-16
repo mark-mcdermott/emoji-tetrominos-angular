@@ -4,16 +4,18 @@
   <p *ngIf="!auth.isAuthenticated()">Not logged in. <a (click)="auth.login()">Log In</a> to continue.</p>
 </div>
 -->
+<div class="home">
 
-<div class="jumbotron">
-  <h1>Auth0-Mongo-Angular Test App</h1>
-  Dr. Simon Tam: [to River] If there's any fighting, drop to the floor or run away. <br>
-  Dr. Simon Tam: It's okay to leave them to die. <br>
-  <br>
-  <a *ngIf="!auth.isAuthenticated()" class="btn btn-lg btn-primary" href="../../components/navbar/" role="button">New User? Get Started</a>
-
-  <div *ngIf="auth.isAuthenticated()">
-    <p>Hi {{username}}!</p>
+  <div class="alert alert-secondary">
+    <div class="sign-up-message" *ngIf="!auth.isAuthenticated()">
+      <p>New user?  <br class="sentence-break">Sign up to have your <br class="mid-sentence-break">scores saved!</p>
+      <button class="btn btn-primary">Sign Up</button>
+    </div>
+    <div *ngIf="auth.isAuthenticated()">
+      <p>Hi {{username}}!</p>
+    </div>
   </div>
+
+  <app-game></app-game>
 
 </div>

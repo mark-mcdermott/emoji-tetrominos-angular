@@ -1,2 +1,20 @@
+.home { text-align: center; }
 .auth-message p { margin: 20px 0 0; text-align: right; }
-.jumbotron { margin: 3em 0; }
+.alert { margin: 2em auto; padding: 1.5rem 2rem 1.1rem; overflow: hidden; text-align: left; }
+.alert .sign-up-message { display: inline; }
+.alert p, button { display: inline-block; }
+.alert button { margin: 0 0 0 1em; }
+.alert br { display: none; }
+@media (max-width: 780px) {
+  .alert { margin: 2em 0; }
+  .alert { padding: 1.5rem 2rem 1.7rem; }
+  .alert p { display: block; }
+  .alert button { margin: 0; }
+}
+@media (max-width: 720px) {
+  .alert { display: block; }
+  .alert br.sentence-break { display: block; }
+}
+@media (min-width: 249px) and (max-width: 356px) {
+  .alert br.mid-sentence-break { display: block; }
+}

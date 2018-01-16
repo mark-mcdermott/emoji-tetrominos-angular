@@ -1,0 +1,9 @@
+.game {
+  margin: 2em auto;
+  padding: 1.5rem 2rem 1.1rem;
+  overflow: hidden;
+  text-align: left;
+  background-color: #e7e8ea;
+  border: 1px solid #dddfe2;
+  border-radius: .25rem;
+}
