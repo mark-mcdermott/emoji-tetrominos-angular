@@ -19,6 +19,7 @@
 *.launch
 .settings/
 *.sublime-workspace
+*.swp # vim temp swap files
 
 # IDE - VSCode
 .vscode/*
