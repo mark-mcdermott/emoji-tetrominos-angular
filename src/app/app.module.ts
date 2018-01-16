@@ -15,6 +15,8 @@ import { CallbackComponent } from './components/callback/callback.component';
 import { LoggedInContentComponent } from './components/logged-in-content/logged-in-content.component';
 import { ScoresComponent } from './components/scores/scores.component';
 import { ScoreDetailComponent } from './components/score-detail/score-detail.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 
 
@@ -27,7 +29,9 @@ import { ScoreDetailComponent } from './components/score-detail/score-detail.com
     CallbackComponent,
     LoggedInContentComponent,
     ScoresComponent,
-    ScoreDetailComponent
+    ScoreDetailComponent,
+    ProfileComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

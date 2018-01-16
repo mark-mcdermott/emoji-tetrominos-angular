@@ -6,8 +6,8 @@ import { Score } from '../../models/score' ;
 
 @Injectable()
 export class ScoreService {
-  domain: string = 'http://localhost:3000';
-  //domain: string = 'http://34.215.246.25:3000';
+  //domain: string = 'http://localhost:3000';
+  domain: string = 'http://34.215.246.25:3000';
 
   constructor(private http: HttpClient) { }
 

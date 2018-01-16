@@ -11,4 +11,9 @@
   Dr. Simon Tam: It's okay to leave them to die. <br>
   <br>
   <a *ngIf="!auth.isAuthenticated()" class="btn btn-lg btn-primary" href="../../components/navbar/" role="button">New User? Get Started</a>
+
+  <div *ngIf="auth.isAuthenticated()">
+    <p>Hi {{username}}!</p>
+  </div>
+
 </div>
