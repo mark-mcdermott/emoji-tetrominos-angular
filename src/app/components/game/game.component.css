@@ -7,3 +7,7 @@
   border: 1px solid #dddfe2;
   border-radius: .25rem;
 }
+
+.instructions p { 
+  margin: 0;
+}
