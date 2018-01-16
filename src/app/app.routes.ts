@@ -3,8 +3,8 @@ import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
 import { LoggedInContentComponent } from './components/logged-in-content/logged-in-content.component';
 import { CallbackComponent } from './components/callback/callback.component';
-import { BooksComponent } from './components/books/books.component';
-import { BookDetailComponent } from './components/book-detail/book-detail.component';
+import { ScoresComponent } from './components/scores/scores.component';
+import { ScoreDetailComponent } from './components/score-detail/score-detail.component';
 
 
 export const ROUTES: Routes = [
@@ -13,7 +13,7 @@ export const ROUTES: Routes = [
    { path: 'about', component: AboutComponent },
    { path: 'logged-in-content', component: LoggedInContentComponent },
    { path: 'callback', component: CallbackComponent },
-   { path: 'books', component: BooksComponent },
-   { path: 'book/:id', component: BookDetailComponent },
+   { path: 'scores', component: ScoresComponent },
+   { path: 'score/:id', component: ScoreDetailComponent },
    { path: '**', redirectTo: '' }
 ];

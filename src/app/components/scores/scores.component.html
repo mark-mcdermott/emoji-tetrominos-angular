@@ -1,0 +1,25 @@
+<div class="form-page">
+  <h2>Scores</h2><br><br>
+  <h5>All Scores</h5>
+  <ul>
+    <li *ngFor="let score of scores">
+      <a [routerLink]="['/score/'+score._id]" data-id="{{score._id}}" (click)="onSelect(score)">
+        <em>{{score.name}}</em>, {{score.score}}
+      </a>
+      <button class="delete" data-id="{{score._id}}" (click)="deleteScore(score._id)"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+    </li>
+
+  </ul><br><br>
+
+  <h5>Add Score</h5>
+  <form (submit)="addScore($event)">
+    <input type="text" [(ngModel)]="name" name="name" class="form-control" placeholder="Name">
+    <input type="text" [(ngModel)]="score" name="score" class="form-control" placeholder="Score">
+    <button type="submit" class="btn btn-primary">
+      Submit
+    </button>
+
+  </form>
+
+
+</div>

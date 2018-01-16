@@ -5,7 +5,7 @@ const cors = require('cors');
 const path = require('path');
 const router = require('express-promise-router')();
 const mongojs = require('mongojs');
-const db = mongojs('books', ['books']);
+const db = mongojs('scores', ['scores']);
 const app = express();
 
 // port
@@ -16,67 +16,70 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
-// Get All Books
-app.get('/api/books', (req, res, next) => {
-    db.books.find((err, books) => {
+// Get All Scores
+app.get('/api/scores', (req, res, next) => {
+    db.scores.find((err, scores) => {
         if (err) return next(err);
-        res.json(books);
+        res.json(scores);
     });
 });
 
-// Single Book
-app.get('/api/book/:id', (req, res, next) => {
-    db.books.findOne({_id: mongojs.ObjectId(req.params.id)}, (err, book) => {
+// Single Score
+app.get('/api/score/:id', (req, res, next) => {
+    db.scores.findOne({_id: mongojs.ObjectId(req.params.id)}, (err, score) => {
         if (err) return next(err);
-        res.json(book);
+        res.json(score);
     });
 });
 
-// Add a Book
-app.post('/api/books', (req, res, next) => {
+// Add a Score
+app.post('/api/scores', (req, res, next) => {
     const task = req.body;
-    if(!task.title || !(task.isDone + '')) {
+    if(!task.name || !(task.isDone + '')) {
         res.status(400).json({
             'error': 'Bad Data'
         });
     } else {
-        db.books.save(task, (err, task) => {
+        db.scores.save(task, (err, task) => {
             if (err) return next(err);
             res.json(task);
         });
     }
 });
 
-// Delete Book
-app.delete('/api/books/:id', (req, res, next) => {
-    db.books.remove({_id: mongojs.ObjectId(req.params.id)}, (err, book) => {
+// Delete Score
+app.delete('/api/scores/:id', (req, res, next) => {
+    db.scores.remove({_id: mongojs.ObjectId(req.params.id)}, (err, score) => {
         if(err){ res.send(err); }
-        res.json(book);
+        res.json(score);
     });
 })
 
-// Update Book
-app.put('/api/books/:id', (req, res, next) => {
-    const book = req.body;
-    let updateBook = {};
+// Update Score
+app.put('/api/scores/:id', (req, res, next) => {
+    const score = req.body;
+    let updateScore = {};
 
-    if(book.isDone) {
-        updateBook.isDone = book.isDone;
+    if(score.isDone) {
+        updateScore.isDone = score.isDone;
     }
-    if(book.title) {
-        updateBook.title = book.title;
+    if(score.name) {
+        updateScore.name = score.name;
     }
-    db.books.update({_id: mongojs.ObjectId(req.params.id)}, updateBook, {}, (err, book) => {
+    if(score.score) {
+        updateScore.score = score.score;
+    }
+    db.scores.update({_id: mongojs.ObjectId(req.params.id)}, updateScore, {}, (err, score) => {
         if (err) return next(err);
-        res.json(book);
+        res.json(score);
     });
     /*if(!updateTask) {
         res.status(400);
         res.json({'error': 'bad request'});
     } else {
-        db.books.update({_id: mongojs.ObjectId(req.params.id)}, updateBook, {}, (err, book) => {
+        db.scores.update({_id: mongojs.ObjectId(req.params.id)}, updateScore, {}, (err, score) => {
             if (err) return next(err);
-            res.json(book);
+            res.json(score);
         });
     }*/
 });

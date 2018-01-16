@@ -1,0 +1,7 @@
+<div *ngIf="score" class="text-page">
+  <h2>{{score.name}} <button class="delete" data-id="{{score._id}}" (click)="deleteScore(score._id)"><i class="fa fa-trash-o" aria-hidden="true"></i></button></h2>
+  <p>Id: {{score._id}}</p>
+  <p><label>Name:</label> <input [(ngModel)]="score.name" placeholder="name"></p>
+  <p><label>Score:</label> <input [(ngModel)]="score.score" placeholder="score"></p>
+  <button (click)="updateScore(score)" class="btn btn-primary">Submit Edit</button>
+</div>
