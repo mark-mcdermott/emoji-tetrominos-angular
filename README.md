@@ -4,7 +4,7 @@
 
 install mongo (https://docs.mongodb.com/manual/installation/)
 
-`mongod`
+`mongod` 
 
 in another tab `git clone https://github.com/mark-mcdermott/mean-crud.git`
 
