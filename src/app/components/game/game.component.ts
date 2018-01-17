@@ -1,18 +1,18 @@
 import { Component, OnInit, ViewChild, AfterViewChecked } from '@angular/core';
 import { Block } from '../../models/block';
-   
+
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.css']
 })
-export class GameComponent implements AfterViewChecked {
+export class GameComponent implements OnInit {
 
   @ViewChild("canvas") canvas;
 
-  fallingBlock: any;
+  fallingBlock: Block = null;
 
-  constructor() { 
+  constructor() {
   }
 
   // setup canvas stuff
@@ -20,10 +20,9 @@ export class GameComponent implements AfterViewChecked {
   //  this.initGame();
   //}
 
-  ngAfterViewChecked() {
+  ngOnInit() {
     this.initGame();
     this.spawnBlock();
-    console.log(this);
     this.draw();
   }
 
@@ -71,26 +70,31 @@ export class GameComponent implements AfterViewChecked {
   */
 
   pixel: number;
+  emoji: string;
 
   // frame counter (needed for block entrance timing)
   frame: number = 0;
 
-  speed: number = 125;
+  //speed: number = 125;
+  speed: number = 50;
   fontStyle: string = '30px Georgia';
 
   initGame() {
-    console.log('init');
     let canvas = this.canvas.nativeElement;
     this.ctx = canvas.getContext("2d");
-    this.canWidth = this.canvas.width; 
-  } 
+    this.canWidth = canvas.width;
+    this.pixel = this.canWidth / 10;
+    // console.log(this.canWidth);
+    // console.log(this.pixel);
+  }
 
   drawBlock(coords, numPix, emoji) {
-    let ctx = this.ctx;
-    let pixel = this.pixel;
+    // console.log(emoji + ' ' + coords[0][1]);
+    // let ctx = this.ctx;
+    // let pixel = this.pixel;
     for (let i=0; i<numPix; i++) {
       this.ctx.font = this.fontStyle;
-      this.ctx.fillText(emoji, (coords[i][0]) * pixel, (coords[i][1]) * pixel);
+      this.ctx.fillText(emoji, (coords[i][0]) * this.pixel, (coords[i][1]) * this.pixel);
     }
   }
 
@@ -138,11 +142,12 @@ export class GameComponent implements AfterViewChecked {
   moveDown() {
 
     if (this.fallingBlock) {
-
+      // console.log('move down');
       // check if block is touching bottom now
       let touchingFloor = false;
       for (let i=0; i<this.fallingBlock.coords.length && touchingFloor===false; i++) {
         if (this.fallingBlock['coords'][i][1] === 19) {
+          // console.log('touching floor')
           touchingFloor = true;
         }
       }
@@ -154,6 +159,7 @@ export class GameComponent implements AfterViewChecked {
         for (let coords of this.fallingBlock.coords) {
           const [ x, y ] = coords;
           if (this.landed[ y + 1 ][ x ] !== '0') {
+            // console.log('collision')
             collision = true;
           }
         }
@@ -164,14 +170,18 @@ export class GameComponent implements AfterViewChecked {
         for (let coords of this.fallingBlock.coords) {
           const [ x, y ] = coords;
           if (y === 0) {
+            // console.log('board full')
             return 'boardFull';
-          } 
+          }
           this.landed[y][x] = this.fallingBlock.letter;
         }
         this.fallingBlock = null;
         return 'cantMoveDown';
       } else {
         // lower the block
+        // console.log('lower')
+        // console.log(this.fallingBlock.letter)
+        // console.log(this.fallingBlock.coords);
         for (let i=0; i<this.fallingBlock.coords.length; i++) {
           this.fallingBlock['coords'][i][1]++;
         }
@@ -308,8 +318,10 @@ export class GameComponent implements AfterViewChecked {
   }
 
   drawFallingBlock() {
-    if (this.fallingBlock) {
+    // console.log(this.fallingBlock.emoji);
+    if (this.fallingBlock != null) {
       //let color = getColor(fallingBlock.letter);
+
       this.drawBlock(
         this.fallingBlock.coords,
         this.fallingBlock.numPix,
@@ -319,13 +331,15 @@ export class GameComponent implements AfterViewChecked {
   }
 
   moveDownOrNewBlock() {
-    //console.log(speed);
-    if (this.frame % (this.speed / 5) === 0) {
-      if (!this.fallingBlock) {
+    // console.log('moveDownOrNewBlock');
+    if (this.frame % this.speed === 0) {
+      if (this.fallingBlock == null) {
+        // console.log('spawn')
         this.spawnBlock();
       }
     }
     if (this.frame % this.speed === 0) {
+      // console.log(this.frame + ': move down');
       if (this.moveDown() === 'boardFull') {
         return 'boardFull';
       }
@@ -334,18 +348,17 @@ export class GameComponent implements AfterViewChecked {
   }
 
   checkSpeedUp() {
-    console.log('checkSpeedUp');
-    //console.log(frame, speed);
-    if (this.frame % 1000 === 0) {
-      if (this.speed > 49) {
-        //console.log('a');
-        this.speed -= 25;
-      }
-      if (this.speed > 10 && this.speed < 50) {
-        //console.log('b');
-        this.speed -= 5;
-      }
-    }
+    // console.log('checkSpeedUp');
+    // if (this.frame % 1000000 === 0) {
+    //   if (this.speed > 49) {
+    //     //console.log('a');
+    //     this.speed -= 25;
+    //   }
+    //   if (this.speed > 10 && this.speed < 50) {
+    //     //console.log('b');
+    //     this.speed -= 5;
+    //   }
+    // }
   }
 
   // spawns new block at top
@@ -354,9 +367,6 @@ export class GameComponent implements AfterViewChecked {
   // this falling var couldn't be seen by the other functions
   // (scoping issues), so scrapping for now...
   spawnBlock() {
-
-    console.log('spawn');
-
     let blockType;
     let x;
     const numBlock = Math.floor(Math.random() * 7);
@@ -399,7 +409,6 @@ export class GameComponent implements AfterViewChecked {
         break;
 
     }
-
     const y = 0;
     this.fallingBlock = new Block(blockType, x, y);
   }
@@ -431,22 +440,30 @@ export class GameComponent implements AfterViewChecked {
 
   // main draw loop (calls itself recursively at end)
   draw() {
-    this.checkSpeedUp();
-    if (this.moveDownOrNewBlock() === 'boardFull') {
-      //console.log('boardFull: ' + boardFull);
-      this.speed = 125;
-      for (let i=0; i<10; i++) {
-        for (let j=0; j<20; j++) {
-          this.landed[j][i] = '0';
+    if (this.frame % this.speed === 0) {
+      // console.log(this);
+      // this.checkSpeedUp();
+      if (this.moveDownOrNewBlock() === 'boardFull') {
+        // console.log('full');
+        for (let i=0; i<10; i++) {
+          for (let j=0; j<20; j++) {
+            this.landed[j][i] = '0';
+          }
         }
       }
+      this.checkFullRows();
+      this.clearBoard();
+      this.drawLanded();
+      if (this.fallingBlock != null) {
+        // console.log(this.fallingBlock.emoji);
+      }
+      this.drawFallingBlock();
+
+      // if (confirm("continue?")) {
+      //   this.draw();
+      // }
+      // setTimeout(this.draw(), 30000);
     }
-    this.checkFullRows();
-    this.clearBoard();
-    //makeGrid();
-    //drawText();
-    this.drawLanded();
-    this.drawFallingBlock();
     this.frame++;
     requestAnimationFrame(() => {
       this.draw();
